@@ -16,11 +16,18 @@ def daftar_divisi(nama, nim):
     clear()
 
     print("\n=== DAFTAR DIVISI MAKRAB ===")
+    
+    ada_divisi = [divisi for divisi in data_daftar_divisi if kuota_divisi[divisi] > 0]
+    
+    if len(ada_divisi) == 0:
+        print("\nMohon maaf, pendaftaran ditutup karena semua kuota divisi sudah penuh.")
+        enter_kembali()
+        return
 
     tabel_divisi = PrettyTable()
     tabel_divisi.field_names = ["No", "Divisi", "Kuota Awal"]
 
-    for i, divisi in enumerate(data_daftar_divisi):
+    for i, divisi in enumerate(ada_divisi):
         tabel_divisi.add_row([
             i + 1,
             divisi,
@@ -37,7 +44,7 @@ def daftar_divisi(nama, nim):
     pilihan_divisi = []
     alasan = []
 
-    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", data_daftar_divisi)
+    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", ada_divisi)
     pilihan_divisi.append(pilihan_1)
 
     while True:
@@ -52,53 +59,47 @@ def daftar_divisi(nama, nim):
                 alasan.append(alasan_1)
                 break
             
-    pilihan_kedua = [
-        divisi for divisi in data_daftar_divisi
-        if divisi not in pilihan_divisi
-    ]
+    pilihan_kedua = [divisi for divisi in ada_divisi if divisi not in pilihan_divisi]
 
-    pilihan_2 = pilih_divisi("Pilih DIVISI PRIORITAS 2:", pilihan_kedua)
-    pilihan_divisi.append(pilihan_2)
+    if len(pilihan_kedua) > 0:
+        pilihan_2 = pilih_divisi("Pilih DIVISI PRIORITAS 2:", pilihan_kedua)
+        pilihan_divisi.append(pilihan_2)
+
+        while True:
+            try:
+                alasan_2 = input(f"Alasan memilih divisi {pilihan_2}: ").strip()
+
+                if alasan_2 == "":
+                    raise ValueError("Alasan tidak boleh kosong, wajib diisi")
+            except ValueError as e:
+                print(e)
+            else:
+                    alasan.append(alasan_2)
+                    break
     
-    while True:
-        try:
-            alasan_2 = input(f"Alasan memilih divisi {pilihan_2}: ").strip()
-
-            if alasan_2 == "":
-                raise ValueError("Alasan tidak boleh kosong, wajib diisi")
-        except ValueError as e:
-            print(e)
-        else:
-                alasan.append(alasan_2)
-                break
     
-    pilihan_ketiga = [
-        divisi for divisi in data_daftar_divisi
-        if divisi not in pilihan_divisi
-    ]
+    pilihan_ketiga = [divisi for divisi in ada_divisi if divisi not in pilihan_divisi]
 
-    pilihan_3 = pilih_divisi("Pilih DIVISI PRIORITAS 3:", pilihan_ketiga)
-    pilihan_divisi.append(pilihan_3)
-    
-    while True:
-        try:
-            alasan_3 = input(f"Alasan memilih divisi {pilihan_3}: ").strip()
+    if len(pilihan_ketiga) > 0:
+        pilihan_3 = pilih_divisi("Pilih DIVISI PRIORITAS 3:", pilihan_ketiga)
+        pilihan_divisi.append(pilihan_3)
 
-            if alasan_3 == "":
-                raise ValueError("Alasan tidak boleh kosong, wajib diisi")
-        except ValueError as e:
-            print(e)
-        else:
-                alasan.append(alasan_3)
-                break
+        while True:
+            try:
+                alasan_3 = input(f"Alasan memilih divisi {pilihan_3}: ").strip()
+
+                if alasan_3 == "":
+                    raise ValueError("Alasan tidak boleh kosong, wajib diisi")
+            except ValueError as e:
+                print(e)
+            else:
+                    alasan.append(alasan_3)
+                    break
 
     print("\n=== KONFIRMASI PENDAFTARAN ===")
-    print(f"Divisi 1 : {pilihan_divisi[0]}")
-    print(f"Alasan  : {alasan[0]}")
-    print(f"Divisi 2 : {pilihan_divisi[1]}")
-    print(f"Alasan  : {alasan[1]}")
-    print(f"Divisi 3 : {pilihan_divisi[2]}")
-    print(f"Alasan  : {alasan[2]}")
+    for i in range(len(pilihan_divisi)):
+        print(f"Divisi {i+1}: {pilihan_divisi[i]}")
+        print(f"Alasan: {alasan[i]}")
     
     setuju = konfirmasi(
         "\nApakah data sudah benar? (ya/tidak): "
@@ -153,9 +154,9 @@ def lihat_status(nim):
     print(f"Status             : {pendaftar['status']}")
 
     print("\nPilihan Divisi:")
-    print(f"1. {pendaftar['pilihan_divisi'][0]}")
-    print(f"2. {pendaftar['pilihan_divisi'][1]}")
-    print(f"3. {pendaftar['pilihan_divisi'][2]}")
+    for i in range(len(pendaftar["pilihan_divisi"])):
+        print(f"{i+1}. {pendaftar['pilihan_divisi'][i]}")
+        print(f"Alasan {pendaftar['pilihan_divisi'][i]}: {pendaftar['alasan'][i]}")
 
     print(f"\nDivisi Diterima    : {pendaftar['divisi_diterima']}")
     print(f"Tanggal Pendaftaran: {pendaftar['tanggal']}")
