@@ -27,7 +27,7 @@ data_akun = [
 #     }
 # ]
 
-data_pendaftar_divisi = []
+data_pendaftars_divisi = []
 
 daftar_divisi = [
     "ACARA",
