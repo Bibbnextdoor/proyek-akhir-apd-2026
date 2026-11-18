@@ -68,10 +68,8 @@ def register():
 
             if nama == "":
                 raise ValueError("Nama tidak boleh kosong.")
-                
-            for akun in data_akun:
-                if akun["nama"].lower() == nama.lower():
-                    raise ValueError( "Nama sudah terdaftar. Gunakan nama lain.")
+            elif not re.match(r"^[a-zA-Z\s']+$", nama):
+                raise ValueError("Input hanya boleh huruf, spasi, dan tanda petik satu (')!")
                     
         except ValueError as e:
             print(e)    
@@ -84,8 +82,11 @@ def register():
 
             if nim == "":
                 raise ValueError("NIM tidak boleh kosong.")
+            elif not nim.isdigit():
+                raise ValueError("NIM hanya boleh angka.")
+                
 
-            for akun in data_akun:
+            for akun in DATABASE_AKUN:
                 if akun["nim"] == nim:
                     raise ValueError("NIM sudah terdaftar. Gunakan NIM lain.")
         
@@ -107,7 +108,7 @@ def register():
 
     akun_baru = {"nama": nama, "nim": nim, "password": password, "role": "user"}
 
-    data_akun.append(akun_baru)
+    DATABASE_AKUN.append(akun_baru)
 
     print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
     print("Akun berhasil dibuat sebagai User.")
