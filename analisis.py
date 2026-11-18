@@ -36,7 +36,7 @@ def grafik_minat_divisi():
         hasil = hitung_pilihan(pilihan, hasil)
 
     # Memastikan semua divisi muncul
-    for divisi in daftar_divisi:
+    for divisi in data_daftar_divisi:
         if divisi not in hasil:
             hasil[divisi] = 0
 

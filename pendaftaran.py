@@ -20,7 +20,7 @@ def daftar_divisi(nama, nim):
     tabel_divisi = PrettyTable()
     tabel_divisi.field_names = ["No", "Divisi", "Kuota Awal"]
 
-    for i, divisi in enumerate(daftar_divisi):
+    for i, divisi in enumerate(data_daftar_divisi):
         tabel_divisi.add_row([
             i + 1,
             divisi,
