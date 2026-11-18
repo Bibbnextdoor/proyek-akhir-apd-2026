@@ -12,6 +12,68 @@ def enter_kembali():
 def enter_ulang():
     input(Fore.GREEN + "\nTekan ENTER untuk mencoba ulang..." + Style.RESET_ALL)
 
+def menu_utama():
+    clear()
+
+    tabel_menu = PrettyTable()
+    tabel_menu.field_names = [Fore.YELLOW + "No", "Menu" + Style.RESET_ALL]
+    tabel_menu.align = "l"
+
+    tabel_menu.add_row(["1", "Login"])
+    tabel_menu.add_row(["2", "Registrasi Akun"])
+    tabel_menu.add_row(["3", "Keluar Program"])
+
+    print("\n=== SISTEM PENDAFTARAN MAKRAB INFORMATIKA 2026 ===")
+    print(tabel_menu)
+
+    pilihan = input("Pilih menu: ").strip()
+
+    return pilihan
+
+
+def menu_user():
+    clear()
+
+    tabel_menu = PrettyTable()
+    tabel_menu.field_names = [Fore.YELLOW + "No", "Menu" + Style.RESET_ALL]
+
+    tabel_menu.align = "l"
+
+    tabel_menu.add_row(["1", "Daftar Divisi"])
+    tabel_menu.add_row(["2", "Lihat Status Pendaftaran"])
+    tabel_menu.add_row(["3", "Logout"])
+
+    print("\n=== MENU USER ===")
+    print(tabel_menu)
+
+    return input("Pilih menu: ").strip()
+
+
+def menu_admin():
+    clear()
+
+    tabel_menu = PrettyTable()
+    tabel_menu.field_names = [
+        Fore.YELLOW + "No",
+        "Menu" + Style.RESET_ALL
+    ]
+
+    tabel_menu.align = "l"
+
+    tabel_menu.add_row(["1", "Lihat Daftar Pendaftar"])
+    tabel_menu.add_row(["2", "Lihat Sisa Kuota Divisi"])
+    tabel_menu.add_row(["3", "Update Divisi Pendaftar"])
+    tabel_menu.add_row(["4", "Hapus Data Pendaftar"])
+    tabel_menu.add_row(["5", "Grafik Minat Divisi"])
+    tabel_menu.add_row(["6", "Logout"])
+
+    print("\n=== MENU ADMIN ===")
+    print(tabel_menu)
+
+    return input("Pilih menu: ").strip()
+
+
+# FUNGSI DENGAN PARAMETER
 def pilih_divisi(pesan, daftar_pilihan):
     pertanyaan = [
         inquirer.List(
@@ -24,6 +86,7 @@ def pilih_divisi(pesan, daftar_pilihan):
     jawaban = inquirer.prompt(pertanyaan)
 
     return jawaban["divisi"]
+
 
 def konfirmasi(pesan):
     while True:
