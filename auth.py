@@ -1,0 +1,115 @@
+from data import *
+from utiliti import clear, enter_kembali, enter_ulang
+from pwinput import pwinput
+from colorama import Fore, Style
+from pendaftaran import menu_user_login
+from admin import menu_admin_login
+
+def cari_akun(nim):
+    for akun in data_akun:
+        if akun["nim"] == nim:
+            return akun
+    return None
+
+def login():
+   
+    for percobaan in range(3, 0, -1):
+        clear()
+        print("\n=== LOGIN ===")
+
+        nim = input("NIM: ").strip()
+        password = pwinput("Password: ").strip()
+
+        akun = cari_akun(nim)
+
+        if akun is None:
+            print(Fore.RED + "\nLogin gagal." + Style.RESET_ALL)
+            print("NIM tidak ditemukan.")
+
+        elif akun["password"] != password:
+            print(Fore.RED + "\nLogin gagal." + Style.RESET_ALL)
+            print("Password salah.")
+
+        else:
+            print(
+                Fore.GREEN +
+                f"\nSelamat datang, {akun['nama']}!" +
+                Style.RESET_ALL
+            )
+
+            input("\nTekan ENTER untuk masuk ke menu...")
+
+            if akun["role"] == "admin":
+                menu_admin_login()
+
+            elif akun["role"] == "user":
+                menu_user_login(
+                    akun["nama"],
+                    akun["nim"]
+                )
+            return
+    
+        if percobaan > 1:
+            enter_ulang()
+    
+    clear()
+    print(Fore.RED + "\nAnda telah gagal login 3 kali." + Style.RESET_ALL)
+    print("Silakan mencoba kembali dari menu utama.")
+    enter_kembali()    
+
+def register():
+    clear()
+
+    print("\n=== REGISTRASI AKUN ===")
+
+    while True:
+        try:
+            nama = input("Nama lengkap: ").strip()
+
+            if nama == "":
+                raise ValueError("Nama tidak boleh kosong.")
+                
+            for akun in data_akun:
+                if akun["nama"].lower() == nama.lower():
+                    raise ValueError( "Nama sudah terdaftar. Gunakan nama lain.")
+                    
+        except ValueError as e:
+            print(e)    
+        else: 
+            break    
+
+    while True:
+        try:
+            nim = input("NIM lengkap: ").strip()
+
+            if nim == "":
+                raise ValueError("NIM tidak boleh kosong.")
+
+            for akun in data_akun:
+                if akun["nim"] == nim:
+                    raise ValueError("NIM sudah terdaftar. Gunakan NIM lain.")
+        
+        except ValueError as e:
+            print(e)
+        else:
+            break
+
+    while True:
+        try: 
+            password = pwinput("Password: ").strip()
+
+            if password == "":
+                raise ValueError("Password tidak boleh kosong.")
+        except ValueError as e:
+            print(e)
+        else:
+            break
+
+    akun_baru = {"nama": nama, "nim": nim, "password": password, "role": "user"}
+
+    data_akun.append(akun_baru)
+
+    print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
+    print("Akun berhasil dibuat sebagai User.")
+
+    enter_kembali()

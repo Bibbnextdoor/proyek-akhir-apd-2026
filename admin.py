@@ -13,7 +13,7 @@ def lihat_pendaftar():
 
     print("\n=== DAFTAR PENDAFTAR ===")
 
-    if not DATABASE_PENDAFTAR:
+    if not data_pendaftars_divisi:
         print("Belum ada pendaftar.")
         enter_kembali()
         return
@@ -30,7 +30,7 @@ def lihat_pendaftar():
         "Diterima"
     ]
 
-    for i, pendaftar in enumerate(DATABASE_PENDAFTAR):
+    for i, pendaftar in enumerate(data_pendaftars_divisi):
         tabel.add_row([
             i + 1,
             pendaftar["nama"],
@@ -55,7 +55,7 @@ def lihat_pendaftar():
         try:
             nomor = int(pilihan)
 
-            if 1 <= nomor <= len(DATABASE_PENDAFTAR):
+            if 1 <= nomor <= len(data_pendaftars_divisi):
                 break
             else:
                 print("Nomor pendaftar tidak tersedia.")
@@ -63,7 +63,7 @@ def lihat_pendaftar():
         except ValueError:
             print("Input harus berupa angka.")
 
-    pendaftar = DATABASE_PENDAFTAR[nomor - 1]
+    pendaftar = data_pendaftars_divisi[nomor - 1]
 
     print("\n=== DETAIL PENDAFTAR ===")
     print(f"Nama : {pendaftar['nama']}")
@@ -90,7 +90,7 @@ def lihat_pendaftar():
         divisi_tersedia = []
 
         for divisi in pendaftar["pilihan_divisi"]:
-            if KUOTA_DIVISI[divisi] > 0:
+            if kuota_divisi[divisi] > 0:
                 divisi_tersedia.append(divisi)
 
         if not divisi_tersedia:
@@ -112,7 +112,7 @@ def lihat_pendaftar():
             pendaftar["status"] = "Diterima"
             pendaftar["divisi_diterima"] = divisi_diterima
 
-            KUOTA_DIVISI[divisi_diterima] -= 1
+            kuota_divisi[divisi_diterima] -= 1
 
             print(
                 Fore.GREEN +
@@ -137,11 +137,11 @@ def lihat_kuota():
     tabel = PrettyTable()
     tabel.field_names = ["No", "Divisi", "Sisa Kuota"]
 
-    for i, divisi in enumerate(DAFTAR_DIVISI):
+    for i, divisi in enumerate(daftar_divisi):
         tabel.add_row([
             i + 1,
             divisi,
-            KUOTA_DIVISI[divisi]
+            kuota_divisi[divisi]
         ])
 
     print(tabel)
@@ -156,7 +156,7 @@ def update_divisi():
 
     daftar_diterima = []
 
-    for i, pendaftar in enumerate(DATABASE_PENDAFTAR):
+    for i, pendaftar in enumerate(data_pendaftars_divisi):
         if pendaftar["status"] == "Diterima":
             daftar_diterima.append((i, pendaftar))
 
@@ -198,7 +198,7 @@ def update_divisi():
             print("Input harus berupa angka.")
 
     index = daftar_diterima[nomor - 1][0]
-    pendaftar = DATABASE_PENDAFTAR[index]
+    pendaftar = data_pendaftars_divisi[index]
 
     divisi_lama = pendaftar["divisi_diterima"]
 
@@ -213,7 +213,7 @@ def update_divisi():
     pilihan_baru = []
 
     for divisi in DAFTAR_DIVISI:
-        if divisi != divisi_lama and KUOTA_DIVISI[divisi] > 0:
+        if divisi != divisi_lama and kuota_divisi[divisi] > 0:
             pilihan_baru.append(divisi)
 
     if not pilihan_baru:
@@ -227,8 +227,8 @@ def update_divisi():
 
     if setuju:
 
-        KUOTA_DIVISI[divisi_lama] += 1
-        KUOTA_DIVISI[divisi_baru] -= 1
+        kuota_divisi[divisi_lama] += 1
+        kuota_divisi[divisi_baru] -= 1
 
         pendaftar["divisi_diterima"] = divisi_baru
 
@@ -250,7 +250,7 @@ def hapus_pendaftar():
 
     print("\n=== HAPUS DATA PENDAFTAR ===")
 
-    if not DATABASE_PENDAFTAR:
+    if not data_pendaftars_divisi:
         print("Belum ada data pendaftar.")
         enter_kembali()
         return
@@ -263,7 +263,7 @@ def hapus_pendaftar():
         "Divisi Diterima"
     ]
 
-    for i, pendaftar in enumerate(DATABASE_PENDAFTAR):
+    for i, pendaftar in enumerate(data_pendaftars_divisi):
         tabel.add_row([
             i + 1,
             pendaftar["nama"],
@@ -285,7 +285,7 @@ def hapus_pendaftar():
         try:
             nomor = int(pilihan)
 
-            if 1 <= nomor <= len(DATABASE_PENDAFTAR):
+            if 1 <= nomor <= len(data_pendaftars_divisi):
                 break
             else:
                 print("Nomor pendaftar tidak tersedia.")
@@ -293,7 +293,7 @@ def hapus_pendaftar():
         except ValueError:
             print("Input harus berupa angka.")
 
-    pendaftar = DATABASE_PENDAFTAR[nomor - 1]
+    pendaftar = data_pendaftars_divisi[nomor - 1]
 
     print("\n=== DATA YANG AKAN DIHAPUS ===")
     print(f"Nama : {pendaftar['nama']}")
@@ -309,9 +309,9 @@ def hapus_pendaftar():
         # kuota divisinya dikembalikan
         if pendaftar["status"] == "Diterima":
             divisi_lama = pendaftar["divisi_diterima"]
-            KUOTA_DIVISI[divisi_lama] += 1
+            kuota_divisi[divisi_lama] += 1
 
-        DATABASE_PENDAFTAR.pop(nomor - 1)
+        data_pendaftars_divisi.pop(nomor - 1)
 
         print(
             Fore.GREEN +

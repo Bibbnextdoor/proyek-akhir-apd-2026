@@ -22,7 +22,7 @@ def grafik_minat_divisi():
     clear()
 
     print("\n=== GRAFIK MINAT DIVISI ===")
-    if not DATABASE_PENDAFTAR:
+    if not data_pendaftars_divisi:
         print("Belum ada data pendaftar.")
         enter_kembali()
         return
@@ -30,13 +30,13 @@ def grafik_minat_divisi():
     hasil = {}
 
     # Mengambil pilihan 1, 2, dan 3
-    for pendaftar in DATABASE_PENDAFTAR:
+    for pendaftar in data_pendaftars_divisi:
         pilihan = pendaftar["pilihan_divisi"]
 
         hasil = hitung_pilihan(pilihan, hasil)
 
     # Memastikan semua divisi muncul
-    for divisi in DAFTAR_DIVISI:
+    for divisi in daftar_divisi:
         if divisi not in hasil:
             hasil[divisi] = 0
 
