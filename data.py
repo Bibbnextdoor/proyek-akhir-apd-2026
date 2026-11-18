@@ -41,13 +41,13 @@ data_daftar_divisi = [
 ]
 
 kuota_divisi = {
-    "ACARA": 11,
-    "HUMAS": 8,
-    "KEAMANAN": 13,
-    "KESEHATAN": 8,
-    "DANUS": 7,
-    "KONSUMSI": 12,
-    "PDD": 8,
-    "PERLENGKAPAN": 13,
-    "DEKORASI": 13
+    "ACARA": 0,
+    "HUMAS": 1,
+    "KEAMANAN": 0,
+    "KESEHATAN": 0,
+    "DANUS": 0,
+    "KONSUMSI": 0,
+    "PDD": 0,
+    "PERLENGKAPAN": 0,
+    "DEKORASI": 0
 }
