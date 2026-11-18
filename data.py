@@ -29,7 +29,7 @@ data_akun = [
 
 data_pendaftars_divisi = []
 
-daftar_divisi = [
+data_daftar_divisi = [
     "ACARA",
     "HUMAS",
     "KEAMANAN",

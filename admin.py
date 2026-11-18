@@ -137,7 +137,7 @@ def lihat_kuota():
     tabel = PrettyTable()
     tabel.field_names = ["No", "Divisi", "Sisa Kuota"]
 
-    for i, divisi in enumerate(daftar_divisi):
+    for i, divisi in enumerate(data_daftar_divisi):
         tabel.add_row([
             i + 1,
             divisi,
@@ -212,7 +212,7 @@ def update_divisi():
 
     pilihan_baru = []
 
-    for divisi in DAFTAR_DIVISI:
+    for divisi in data_daftar_divisi:
         if divisi != divisi_lama and kuota_divisi[divisi] > 0:
             pilihan_baru.append(divisi)
 
