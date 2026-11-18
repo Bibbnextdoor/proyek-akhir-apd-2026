@@ -4,6 +4,7 @@ from pwinput import pwinput
 from colorama import Fore, Style
 from pendaftaran import menu_user_login
 from admin import menu_admin_login
+import re
 
 def cari_akun(nim):
     for akun in data_akun:
@@ -86,7 +87,7 @@ def register():
                 raise ValueError("NIM hanya boleh angka.")
                 
 
-            for akun in DATABASE_AKUN:
+            for akun in data_akun:
                 if akun["nim"] == nim:
                     raise ValueError("NIM sudah terdaftar. Gunakan NIM lain.")
         
@@ -108,7 +109,7 @@ def register():
 
     akun_baru = {"nama": nama, "nim": nim, "password": password, "role": "user"}
 
-    DATABASE_AKUN.append(akun_baru)
+    data_akun.append(akun_baru)
 
     print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
     print("Akun berhasil dibuat sebagai User.")

@@ -71,6 +71,7 @@ def lihat_pendaftar():
     print(f"Divisi 1 : {pendaftar['pilihan_divisi'][0]}")
     print(f"Divisi 2 : {pendaftar['pilihan_divisi'][1]}")
     print(f"Divisi 3 : {pendaftar['pilihan_divisi'][2]}")
+    print(f"Alasan : {pendaftar['alasan']}")
     print(f"Status : {pendaftar['status']}")
     print(f"Divisi diterima : {pendaftar['divisi_diterima']}")
 
