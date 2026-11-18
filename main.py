@@ -1,4 +1,4 @@
-from tampilan import menu_utama, clear, enter_kembali
+from utiliti import menu_utama, clear, enter_kembali
 from auth import login, register
 from pwinput import pwinput
 from colorama import init, Fore, Style

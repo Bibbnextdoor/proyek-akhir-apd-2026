@@ -19,8 +19,7 @@ data_akun = [
 #         "nama": "Budi Santoso",
 #         "nim": "123456789",
 #         "pilihan_divisi": ["ACARA", "HUMAS", "KONSUMSI"],
-#         "alasan": "Ingin menambah pengalaman berorganisasi.",
-#         "portfolio": "",
+#         "alasan": [],
 #         "status": "Menunggu Konfirmasi",
 #         "divisi_diterima": "-",
 #         "tanggal": "01-01-2026 10:00"

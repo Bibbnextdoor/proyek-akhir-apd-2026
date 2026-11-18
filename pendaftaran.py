@@ -1,5 +1,5 @@
 from data import *
-from tampilan import clear, enter_kembali, pilih_divisi, konfirmasi, menu_user
+from utiliti import clear, enter_kembali, pilih_divisi, konfirmasi, menu_user
 from prettytable import PrettyTable
 from colorama import Fore, Style
 from datetime import datetime
@@ -35,59 +35,71 @@ def daftar_divisi(nama, nim):
     print("\n=== PILIH 3 DIVISI ===")
 
     pilihan_divisi = []
+    alasan = []
 
-    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", daftar_divisi)
-
+    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", data_daftar_divisi)
     pilihan_divisi.append(pilihan_1)
 
+    while True:
+        try:
+            alasan_1 = input(f"Alasan memilih divisi {pilihan_1}: ").strip()
+
+            if alasan_1 == "":
+                raise ValueError("Alasan tidak boleh kosong, wajib diisi")
+        except ValueError as e:
+            print(e)
+        else:
+                alasan.append(alasan_1)
+                break
+            
     pilihan_kedua = [
-        divisi for divisi in daftar_divisi
+        divisi for divisi in data_daftar_divisi
         if divisi not in pilihan_divisi
     ]
 
-    pilihan_2 = pilih_divisi(
-        "Pilih DIVISI PRIORITAS 2:",
-        pilihan_kedua
-    )
-
+    pilihan_2 = pilih_divisi("Pilih DIVISI PRIORITAS 2:", pilihan_kedua)
     pilihan_divisi.append(pilihan_2)
     
+    while True:
+        try:
+            alasan_2 = input(f"Alasan memilih divisi {pilihan_2}: ").strip()
+
+            if alasan_2 == "":
+                raise ValueError("Alasan tidak boleh kosong, wajib diisi")
+        except ValueError as e:
+            print(e)
+        else:
+                alasan.append(alasan_2)
+                break
+    
     pilihan_ketiga = [
-        divisi for divisi in daftar_divisi
+        divisi for divisi in data_daftar_divisi
         if divisi not in pilihan_divisi
     ]
 
-    pilihan_3 = pilih_divisi(
-        "Pilih DIVISI PRIORITAS 3:",
-        pilihan_ketiga
-    )
-
+    pilihan_3 = pilih_divisi("Pilih DIVISI PRIORITAS 3:", pilihan_ketiga)
     pilihan_divisi.append(pilihan_3)
-
-    print("\n=== PILIHAN DIVISI ===")
-    print(f"Prioritas 1 : {pilihan_divisi[0]}")
-    print(f"Prioritas 2 : {pilihan_divisi[1]}")
-    print(f"Prioritas 3 : {pilihan_divisi[2]}")
-
+    
     while True:
-        alasan = input("\nAlasan memilih divisi: ").strip()
+        try:
+            alasan_3 = input(f"Alasan memilih divisi {pilihan_3}: ").strip()
 
-        if alasan == "":
-            print("Alasan wajib diisi.")
+            if alasan_3 == "":
+                raise ValueError("Alasan tidak boleh kosong, wajib diisi")
+        except ValueError as e:
+            print(e)
         else:
-            break
-
-    portfolio = input(
-        "Portfolio (boleh dikosongkan): "
-    ).strip()
+                alasan.append(alasan_3)
+                break
 
     print("\n=== KONFIRMASI PENDAFTARAN ===")
     print(f"Divisi 1 : {pilihan_divisi[0]}")
+    print(f"Alasan  : {alasan[0]}")
     print(f"Divisi 2 : {pilihan_divisi[1]}")
+    print(f"Alasan  : {alasan[1]}")
     print(f"Divisi 3 : {pilihan_divisi[2]}")
-    print(f"Alasan  : {alasan}")
-    print(f"Portfolio: {portfolio if portfolio else 'Tidak ada'}")
-
+    print(f"Alasan  : {alasan[2]}")
+    
     setuju = konfirmasi(
         "\nApakah data sudah benar? (ya/tidak): "
     )
@@ -99,7 +111,6 @@ def daftar_divisi(nama, nim):
             "nim": nim,
             "pilihan_divisi": pilihan_divisi,
             "alasan": alasan,
-            "portfolio": portfolio,
             "status": "Menunggu Konfirmasi",
             "divisi_diterima": "-",
             "tanggal": datetime.now().strftime("%d-%m-%Y %H:%M")
