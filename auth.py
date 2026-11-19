@@ -17,7 +17,7 @@ def login():
     for percobaan in range(3, 0, -1):
         clear()
         print("\n=== LOGIN ===")
-
+        
         nim = input("NIM: ").strip()
         password = pwinput("Password: ").strip()
 
@@ -65,8 +65,12 @@ def register():
 
     while True:
         try:
+            print("Masukan Nama Lengkap atau kembali")
             nama = input("Nama lengkap: ").strip()
 
+            if nama.lower() == "kembali":
+                return
+            
             if nama == "":
                 raise ValueError("Nama tidak boleh kosong.")
             elif not re.match(r"^[a-zA-Z\s']+$", nama):
@@ -79,8 +83,12 @@ def register():
 
     while True:
         try:
+            print("Masukan NIM atau kembali")
             nim = input("NIM lengkap: ").strip()
 
+            if nim.lower() == "kembali":
+                return
+            
             if nim == "":
                 raise ValueError("NIM tidak boleh kosong.")
             elif not nim.isdigit():
@@ -98,8 +106,12 @@ def register():
 
     while True:
         try: 
+            print("Masukan Password atau kembali")
             password = pwinput("Password: ").strip()
 
+            if password.lower() == "kembali":
+                return
+            
             if password == "":
                 raise ValueError("Password tidak boleh kosong.")
         except ValueError as e:
