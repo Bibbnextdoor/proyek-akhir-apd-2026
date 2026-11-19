@@ -14,7 +14,7 @@ def lihat_pendaftar():
     print("\n=== DAFTAR PENDAFTAR ===")
 
     if not data_pendaftars_divisi:
-        print("Belum ada pendaftar.")
+        print("Belum ada data pendaftar.")
         enter_kembali()
         return
 
@@ -67,12 +67,11 @@ def lihat_pendaftar():
 
     print("\n=== DETAIL PENDAFTAR ===")
     print(f"Nama : {pendaftar['nama']}")
-    print(f"NIM : {pendaftar['nim']}")
-    print(f"Divisi 1 : {pendaftar['pilihan_divisi'][0]}")
-    print(f"Divisi 2 : {pendaftar['pilihan_divisi'][1]}")
-    print(f"Divisi 3 : {pendaftar['pilihan_divisi'][2]}")
-    print(f"Alasan : {pendaftar['alasan']}")
-    print(f"Status : {pendaftar['status']}")
+    print(f"NIM : {pendaftar['nim']}\n")
+    for i in range(len(pendaftar['pilihan_divisi'])):
+        print(f"Divisi {i+1} : {pendaftar['pilihan_divisi'][i]}")
+        print(f"Alasan {pendaftar['pilihan_divisi'][i]}: {pendaftar['alasan'][i]}")
+    print(f"\nStatus : {pendaftar['status']}")
     print(f"Divisi diterima : {pendaftar['divisi_diterima']}")
 
     if pendaftar["status"] == "Menunggu Konfirmasi":
