@@ -3,6 +3,7 @@ from utiliti import clear, enter_kembali, pilih_divisi, konfirmasi, menu_user
 from prettytable import PrettyTable
 from colorama import Fore, Style
 from datetime import datetime
+from external import simpan_data
 
 
 def cari_pendaftar(nim):
@@ -118,6 +119,7 @@ def daftar_divisi(nama, nim):
         }
 
         data_pendaftars_divisi.append(data_baru)
+        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
         print(Fore.GREEN + "\nPendaftaran berhasil disimpan." + Style.RESET_ALL)
         print("Status: Menunggu Konfirmasi")

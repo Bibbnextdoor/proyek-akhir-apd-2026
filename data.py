@@ -1,4 +1,8 @@
-data_akun = [
+from external import muat_data
+
+
+# DATA AKUN AWAL
+data_awal_akun = [
     {
         "nama": "ferdika",
         "nim": "039",
@@ -13,8 +17,11 @@ data_akun = [
     }
 ]
 
+
+# DATA PENDAFTAR AWAL
+data_awal_pendaftars_divisi = []
 # Contoh data dummy pendaftar (sebagai referensi, tidak digunakan oleh program):
-# data_akun = [
+# data_akun_pendaftar = [
 #     {
 #         "nama": "Budi Santoso",
 #         "nim": "123456789",
@@ -26,9 +33,9 @@ data_akun = [
 #     }
 # ]
 
-data_pendaftars_divisi = []
 
-data_daftar_divisi = [
+# DAFTAR DIVISI
+data_daftar_divisi = (
     "ACARA",
     "HUMAS",
     "KEAMANAN",
@@ -38,9 +45,11 @@ data_daftar_divisi = [
     "PDD",
     "PERLENGKAPAN",
     "DEKORASI"
-]
+)
 
-kuota_divisi = {
+
+# KUOTA AWAL
+kuota_awal = {
     "ACARA": 1,
     "HUMAS": 3,
     "KEAMANAN": 2,
@@ -51,3 +60,29 @@ kuota_divisi = {
     "PERLENGKAPAN": 5,
     "DEKORASI": 4
 }
+
+
+# MEMUAT DATA DARI JSON
+data_tersimpan = muat_data()
+
+
+if data_tersimpan is None:
+
+    # Jika data.json belum ada,
+    # gunakan data awal
+    data_akun = data_awal_akun
+
+    data_pendaftars_divisi = data_awal_pendaftars_divisi
+
+    kuota_divisi = kuota_awal
+
+
+else:
+
+    # Jika data.json sudah ada,
+    # gunakan data yang tersimpan
+    data_akun = data_tersimpan["data_akun"]
+
+    data_pendaftars_divisi = data_tersimpan["data_pendaftar"]
+
+    kuota_divisi = data_tersimpan["kuota_divisi"]

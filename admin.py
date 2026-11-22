@@ -4,6 +4,7 @@ from data import *
 from utiliti import clear, enter_kembali, pilih_divisi, konfirmasi, menu_admin
 from prettytable import PrettyTable
 from colorama import Fore, Style
+from external import simpan_data
 
 
 # READ
@@ -113,6 +114,7 @@ def lihat_pendaftar():
             pendaftar["divisi_diterima"] = divisi_diterima
 
             kuota_divisi[divisi_diterima] -= 1
+            simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
             print(
                 Fore.GREEN +
@@ -231,6 +233,7 @@ def update_divisi():
         kuota_divisi[divisi_baru] -= 1
 
         pendaftar["divisi_diterima"] = divisi_baru
+        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
         print(
             Fore.GREEN +
@@ -312,6 +315,7 @@ def hapus_pendaftar():
             kuota_divisi[divisi_lama] += 1
 
         data_pendaftars_divisi.pop(nomor - 1)
+        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
         print(
             Fore.GREEN +
