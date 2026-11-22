@@ -33,13 +33,13 @@
                 "k",
                 "i"
             ],
-            "status": "Menunggu Konfirmasi",
-            "divisi_diterima": "-",
+            "status": "Diterima",
+            "divisi_diterima": "ACARA",
             "tanggal": "22-11-2026 11:03"
         }
     ],
     "kuota_divisi": {
-        "ACARA": 1,
+        "ACARA": 0,
         "HUMAS": 3,
         "KEAMANAN": 2,
         "KESEHATAN": 3,
