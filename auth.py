@@ -4,6 +4,7 @@ from pwinput import pwinput
 from colorama import Fore, Style
 from pendaftaran import menu_user_login
 from admin import menu_admin_login
+from external import simpan_data
 import re
 
 def cari_akun(nim):
@@ -122,6 +123,8 @@ def register():
     akun_baru = {"nama": nama, "nim": nim, "password": password, "role": "user"}
 
     data_akun.append(akun_baru)
+    
+    simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
     print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
     print("Akun berhasil dibuat sebagai User.")

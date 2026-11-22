@@ -1,0 +1,52 @@
+{
+    "data_akun": [
+        {
+            "nama": "ferdika",
+            "nim": "039",
+            "password": "039",
+            "role": "admin"
+        },
+        {
+            "nama": "habibur",
+            "nim": "045",
+            "password": "045",
+            "role": "admin"
+        },
+        {
+            "nama": "qwert",
+            "nim": "040",
+            "password": "040",
+            "role": "user"
+        }
+    ],
+    "data_pendaftar": [
+        {
+            "nama": "qwert",
+            "nim": "040",
+            "pilihan_divisi": [
+                "ACARA",
+                "HUMAS",
+                "KEAMANAN"
+            ],
+            "alasan": [
+                "k",
+                "k",
+                "i"
+            ],
+            "status": "Menunggu Konfirmasi",
+            "divisi_diterima": "-",
+            "tanggal": "22-11-2026 11:03"
+        }
+    ],
+    "kuota_divisi": {
+        "ACARA": 1,
+        "HUMAS": 3,
+        "KEAMANAN": 2,
+        "KESEHATAN": 3,
+        "DANUS": 3,
+        "KONSUMSI": 1,
+        "PDD": 2,
+        "PERLENGKAPAN": 5,
+        "DEKORASI": 4
+    }
+}
