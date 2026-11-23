@@ -17,6 +17,12 @@
             "nim": "040",
             "password": "040",
             "role": "user"
+        },
+        {
+            "nama": "lin",
+            "nim": "000",
+            "password": "000",
+            "role": "user"
         }
     ],
     "data_pendaftar": [
@@ -36,6 +42,23 @@
             "status": "Diterima",
             "divisi_diterima": "ACARA",
             "tanggal": "22-11-2026 11:03"
+        },
+        {
+            "nama": "lin",
+            "nim": "000",
+            "pilihan_divisi": [
+                "HUMAS",
+                "KEAMANAN",
+                "KESEHATAN"
+            ],
+            "alasan": [
+                "git",
+                "git",
+                "git"
+            ],
+            "status": "Menunggu Konfirmasi",
+            "divisi_diterima": "-",
+            "tanggal": "23-11-2026 17:10"
         }
     ],
     "kuota_divisi": {

@@ -5,7 +5,6 @@ from utiliti import (
     clear,
     enter_kembali,
     pilih_divisi,
-    pilih_divisi_diterima,
     konfirmasi,
     menu_admin
 )
@@ -107,33 +106,35 @@ def lihat_pendaftar():
             enter_kembali()
             continue
 
-        divisi_diterima = pilih_divisi_diterima(
-            "Pilih divisi yang akan diterima:",
-            divisi_tersedia
-        )
+        while True:
+            divisi_diterima = pilih_divisi(
+                "Pilih divisi yang akan diterima:",
+                divisi_tersedia + ["Batalkan memilih"]
+            )
 
-        if divisi_diterima in (None, "Kembali", "Batalkan memilih"):
-            continue
+            if divisi_diterima == "Batalkan memilih":
+                break
 
-        setuju = konfirmasi(
-            f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): "
-        )
+            setuju = konfirmasi(
+                f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): "
+            )
 
-        if not setuju:
-            continue
+            if not setuju:
+                continue
 
-        pendaftar["status"] = "Diterima"
-        pendaftar["divisi_diterima"] = divisi_diterima
+            pendaftar["status"] = "Diterima"
+            pendaftar["divisi_diterima"] = divisi_diterima
 
-        kuota_divisi[divisi_diterima] -= 1
-        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
+            kuota_divisi[divisi_diterima] -= 1
+            simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
-        print(
-            Fore.GREEN +
-            "\nPendaftar berhasil diterima." +
-            Style.RESET_ALL
-        )
-        enter_kembali()
+            print(
+                Fore.GREEN +
+                "\nPendaftar berhasil diterima." +
+                Style.RESET_ALL
+            )
+            enter_kembali()
+            break
 
 # READ
 def lihat_kuota():
