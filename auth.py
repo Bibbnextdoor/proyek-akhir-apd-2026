@@ -4,6 +4,8 @@ from pwinput import pwinput
 from colorama import Fore, Style
 from pendaftaran import menu_user_login
 from admin import menu_admin_login
+from external import simpan_data
+import re
 
 def cari_akun(nim):
     for akun in data_akun:
@@ -12,11 +14,10 @@ def cari_akun(nim):
     return None
 
 def login():
-   
     for percobaan in range(3, 0, -1):
         clear()
         print("\n=== LOGIN ===")
-
+        
         nim = input("NIM: ").strip()
         password = pwinput("Password: ").strip()
 
@@ -31,24 +32,18 @@ def login():
             print("Password salah.")
 
         else:
-            print(
-                Fore.GREEN +
-                f"\nSelamat datang, {akun['nama']}!" +
-                Style.RESET_ALL
-            )
-
-            input("\nTekan ENTER untuk masuk ke menu...")
-
             if akun["role"] == "admin":
+                print(Fore.GREEN + f"\nSelamat datang, {akun['nama']}! ke menu admin" + Style.RESET_ALL)
+                input("\nTekan ENTER untuk masuk ke menu...")
                 menu_admin_login()
 
             elif akun["role"] == "user":
-                menu_user_login(
-                    akun["nama"],
-                    akun["nim"]
-                )
+                print(Fore.GREEN + f"\nSelamat datang, {akun['nama']}! ke menu pendaftaran" + Style.RESET_ALL)
+                input("\nTekan ENTER untuk masuk ke menu...")                
+                menu_user_login(akun["nama"], akun["nim"])
+            
             return
-    
+
         if percobaan > 1:
             enter_ulang()
     
@@ -64,14 +59,14 @@ def register():
 
     while True:
         try:
+            print("Masukan Nama Lengkap atau kembali")
             nama = input("Nama lengkap: ").strip()
 
-            if nama == "":
-                raise ValueError("Nama tidak boleh kosong.")
-                
-            for akun in data_akun:
-                if akun["nama"].lower() == nama.lower():
-                    raise ValueError( "Nama sudah terdaftar. Gunakan nama lain.")
+            if nama.lower() == "kembali":
+                return
+            
+            if not re.match(r"^[a-zA-Z\s']+$", nama):
+                raise ValueError("Nama tidak boleh kosong atau Input hanya boleh huruf, spasi, dan tanda petik satu (')!.\n")
                     
         except ValueError as e:
             print(e)    
@@ -80,10 +75,17 @@ def register():
 
     while True:
         try:
+            print("Masukan NIM atau kembali")
             nim = input("NIM lengkap: ").strip()
 
+            if nim.lower() == "kembali":
+                return
+            
             if nim == "":
                 raise ValueError("NIM tidak boleh kosong.")
+            elif not nim.isdigit():
+                raise ValueError("NIM hanya boleh angka.")
+                
 
             for akun in data_akun:
                 if akun["nim"] == nim:
@@ -96,8 +98,12 @@ def register():
 
     while True:
         try: 
+            print("Masukan Password atau kembali")
             password = pwinput("Password: ").strip()
 
+            if password.lower() == "kembali":
+                return
+            
             if password == "":
                 raise ValueError("Password tidak boleh kosong.")
         except ValueError as e:
@@ -108,6 +114,8 @@ def register():
     akun_baru = {"nama": nama, "nim": nim, "password": password, "role": "user"}
 
     data_akun.append(akun_baru)
+    
+    simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
     print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
     print("Akun berhasil dibuat sebagai User.")

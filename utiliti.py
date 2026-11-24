@@ -88,6 +88,26 @@ def pilih_divisi(pesan, daftar_pilihan):
     return jawaban["divisi"]
 
 
+def pilih_divisi_diterima(pesan, daftar_pilihan):
+    pilihan = list(daftar_pilihan)
+    pilihan.extend(["Kembali"])
+
+    pertanyaan = [
+        inquirer.List(
+            "divisi",
+            message=pesan,
+            choices=pilihan
+        )
+    ]
+
+    jawaban = inquirer.prompt(pertanyaan)
+
+    if jawaban is None:
+        return None
+
+    return jawaban["divisi"]
+
+
 def konfirmasi(pesan):
     while True:
         jawaban = input(pesan).strip().lower()

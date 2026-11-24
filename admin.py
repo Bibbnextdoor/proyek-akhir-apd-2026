@@ -1,91 +1,94 @@
 # admin.py
 
 from data import *
-from utiliti import clear, enter_kembali, pilih_divisi, konfirmasi, menu_admin
+from utiliti import (
+    clear,
+    enter_kembali,
+    pilih_divisi,
+    konfirmasi,
+    menu_admin)
 from prettytable import PrettyTable
 from colorama import Fore, Style
+from external import simpan_data
 
-
-# READ
 # READ + KONFIRMASI
 def lihat_pendaftar():
-    clear()
-
-    print("\n=== DAFTAR PENDAFTAR ===")
-
-    if not data_pendaftars_divisi:
-        print("Belum ada pendaftar.")
-        enter_kembali()
-        return
-
-    tabel = PrettyTable()
-
-    tabel.field_names = [
-        "No",
-        "Nama",
-        "Divisi 1",
-        "Divisi 2",
-        "Divisi 3",
-        "Status",
-        "Diterima"
-    ]
-
-    for i, pendaftar in enumerate(data_pendaftars_divisi):
-        tabel.add_row([
-            i + 1,
-            pendaftar["nama"],
-            pendaftar["pilihan_divisi"][0],
-            pendaftar["pilihan_divisi"][1],
-            pendaftar["pilihan_divisi"][2],
-            pendaftar["status"],
-            pendaftar["divisi_diterima"]
-        ])
-
-    print(tabel)
-
     while True:
+        clear()
 
-        pilihan = input(
-            "\nMasukkan nomor pendaftar atau 'kembali': "
-        ).strip()
+        print("\n=== DAFTAR DATA PENDAFTAR ===")
 
-        if pilihan.lower() == "kembali":
+        if not data_pendaftars_divisi:
+            print("Belum ada data pendaftar.")
+            enter_kembali()
             return
 
-        try:
-            nomor = int(pilihan)
+        tabel = PrettyTable()
+        tabel.field_names = [
+            "No",
+            "Nama",
+            "Divisi 1",
+            "Divisi 2",
+            "Divisi 3",
+            "Status",
+            "Diterima"
+        ]
 
-            if 1 <= nomor <= len(data_pendaftars_divisi):
-                break
-            else:
-                print("Nomor pendaftar tidak tersedia.")
+        for i, pendaftar in enumerate(data_pendaftars_divisi):
+            tabel.add_row([
+                i + 1,
+                pendaftar["nama"],
+                pendaftar["pilihan_divisi"][0],
+                pendaftar["pilihan_divisi"][1],
+                pendaftar["pilihan_divisi"][2],
+                pendaftar["status"],
+                pendaftar["divisi_diterima"]
+            ])
 
-        except ValueError:
-            print("Input harus berupa angka.")
+        print(tabel)
 
-    pendaftar = data_pendaftars_divisi[nomor - 1]
+        while True:
+            pilihan = input(
+                "\nMasukkan nomor pendaftar atau 'kembali': "
+            ).strip()
 
-    print("\n=== DETAIL PENDAFTAR ===")
-    print(f"Nama : {pendaftar['nama']}")
-    print(f"NIM : {pendaftar['nim']}")
-    print(f"Divisi 1 : {pendaftar['pilihan_divisi'][0]}")
-    print(f"Divisi 2 : {pendaftar['pilihan_divisi'][1]}")
-    print(f"Divisi 3 : {pendaftar['pilihan_divisi'][2]}")
-    print(f"Status : {pendaftar['status']}")
-    print(f"Divisi diterima : {pendaftar['divisi_diterima']}")
+            if pilihan.lower() == "kembali":
+                return
 
-    if pendaftar["status"] == "Menunggu Konfirmasi":
+            try:
+                nomor = int(pilihan)
+
+                if 1 <= nomor <= len(data_pendaftars_divisi):
+                    break
+                else:
+                    print("Nomor pendaftar tidak tersedia.")
+
+            except ValueError:
+                print("Input harus berupa angka.")
+
+        pendaftar = data_pendaftars_divisi[nomor - 1]
+
+        clear()
+        print("\n=== DETAIL PENDAFTAR ===")
+        print(f"Nama : {pendaftar['nama']}")
+        print(f"NIM : {pendaftar['nim']}\n")
+        for i in range(len(pendaftar['pilihan_divisi'])):
+            print(f"Divisi {i+1} : {pendaftar['pilihan_divisi'][i]}")
+            print(f"Alasan {pendaftar['pilihan_divisi'][i]}: {pendaftar['alasan'][i]}")
+        print(f"\nStatus : {pendaftar['status']}")
+        print(f"Divisi diterima : {pendaftar['divisi_diterima']}")
+
+        if pendaftar["status"] != "Menunggu Konfirmasi":
+            print("\nPendaftar ini sudah dikonfirmasi.")
+            enter_kembali()
+            continue
 
         print("\nPendaftar belum dikonfirmasi.")
 
-        lanjut = konfirmasi(
-            "Apakah ingin mengonfirmasi pendaftar ini? (ya/tidak): "
-        )
+        lanjut = konfirmasi("Apakah ingin mengonfirmasi pendaftar ini? (ya/tidak): ")
 
         if not lanjut:
-            print("\nKonfirmasi dibatalkan.")
-            enter_kembali()
-            return
+            continue
 
         divisi_tersedia = []
 
@@ -94,39 +97,30 @@ def lihat_pendaftar():
                 divisi_tersedia.append(divisi)
 
         if not divisi_tersedia:
-            print("\nSemua pilihan divisi sudah penuh.")
+            print("\nSemua kuota pilihan divisi sudah habis.")
             enter_kembali()
-            return
+            continue
 
-        divisi_diterima = pilih_divisi(
-            "Pilih divisi yang akan diterima:",
-            divisi_tersedia
-        )
+        while True:
+            divisi_diterima = pilih_divisi("Pilih divisi yang akan diterima:", divisi_tersedia + ["Batalkan memilih"])
 
-        setuju = konfirmasi(
-            f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): "
-        )
+            if divisi_diterima == "Batalkan memilih":
+                break
 
-        if setuju:
+            setuju = konfirmasi(f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): ")
+
+            if not setuju:
+                continue
 
             pendaftar["status"] = "Diterima"
             pendaftar["divisi_diterima"] = divisi_diterima
 
             kuota_divisi[divisi_diterima] -= 1
+            simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
-            print(
-                Fore.GREEN +
-                "\nPendaftar berhasil diterima." +
-                Style.RESET_ALL
-            )
-
-        else:
-            print("\nKonfirmasi dibatalkan.")
-
-    else:
-        print("\nPendaftar ini sudah tidak menunggu konfirmasi.")
-
-    enter_kembali()
+            print(Fore.GREEN + "\nPendaftar berhasil diterima." + Style.RESET_ALL)
+            enter_kembali()
+            break
 
 # READ
 # READ
@@ -138,7 +132,7 @@ def lihat_kuota():
     tabel = PrettyTable()
     tabel.field_names = ["No", "Divisi", "Sisa Kuota"]
 
-    for i, divisi in enumerate(DAFTAR_DIVSI):
+    for i, divisi in enumerate(data_daftar_divisi):
         tabel.add_row([
             i + 1,
             divisi,
@@ -178,7 +172,6 @@ def lihat_kuota():
 
     enter_kembali()
 
-
 # UPDATE
 def update_divisi():
     clear()
@@ -210,9 +203,7 @@ def update_divisi():
 
     while True:
 
-        pilihan = input(
-            "\nMasukkan nomor pendaftar atau 'kembali': "
-        ).strip()
+        pilihan = input("\nMasukkan nomor pendaftar atau 'kembali': ").strip()
 
         if pilihan.lower() == "kembali":
             return
@@ -243,7 +234,7 @@ def update_divisi():
 
     pilihan_baru = []
 
-    for divisi in DAFTAR_DIVSI:
+    for divisi in data_daftar_divisi:
         if divisi != divisi_lama and kuota_divisi[divisi] > 0:
             pilihan_baru.append(divisi)
 
@@ -262,6 +253,7 @@ def update_divisi():
         kuota_divisi[divisi_baru] -= 1
 
         pendaftar["divisi_diterima"] = divisi_baru
+        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
         print(
             Fore.GREEN +
@@ -343,6 +335,7 @@ def hapus_pendaftar():
             kuota_divisi[divisi_lama] += 1
 
         data_pendaftars_divisi.pop(nomor - 1)
+        simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
         print(
             Fore.GREEN +
