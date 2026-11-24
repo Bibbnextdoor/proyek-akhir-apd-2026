@@ -6,20 +6,17 @@ from utiliti import (
     enter_kembali,
     pilih_divisi,
     konfirmasi,
-    menu_admin
-)
+    menu_admin)
 from prettytable import PrettyTable
 from colorama import Fore, Style
 from external import simpan_data
 
-
-# READ
 # READ + KONFIRMASI
 def lihat_pendaftar():
     while True:
         clear()
 
-        print("\n=== DAFTAR PENDAFTAR ===")
+        print("\n=== DAFTAR DATA PENDAFTAR ===")
 
         if not data_pendaftars_divisi:
             print("Belum ada data pendaftar.")
@@ -82,15 +79,13 @@ def lihat_pendaftar():
         print(f"Divisi diterima : {pendaftar['divisi_diterima']}")
 
         if pendaftar["status"] != "Menunggu Konfirmasi":
-            print("\nPendaftar ini sudah tidak menunggu konfirmasi.")
+            print("\nPendaftar ini sudah dikonfirmasi.")
             enter_kembali()
             continue
 
         print("\nPendaftar belum dikonfirmasi.")
 
-        lanjut = konfirmasi(
-            "Apakah ingin mengonfirmasi pendaftar ini? (ya/tidak): "
-        )
+        lanjut = konfirmasi("Apakah ingin mengonfirmasi pendaftar ini? (ya/tidak): ")
 
         if not lanjut:
             continue
@@ -102,22 +97,17 @@ def lihat_pendaftar():
                 divisi_tersedia.append(divisi)
 
         if not divisi_tersedia:
-            print("\nSemua pilihan divisi sudah penuh.")
+            print("\nSemua kuota pilihan divisi sudah habis.")
             enter_kembali()
             continue
 
         while True:
-            divisi_diterima = pilih_divisi(
-                "Pilih divisi yang akan diterima:",
-                divisi_tersedia + ["Batalkan memilih"]
-            )
+            divisi_diterima = pilih_divisi("Pilih divisi yang akan diterima:", divisi_tersedia + ["Batalkan memilih"])
 
             if divisi_diterima == "Batalkan memilih":
                 break
 
-            setuju = konfirmasi(
-                f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): "
-            )
+            setuju = konfirmasi(f"Terima pendaftar ke divisi {divisi_diterima}? (ya/tidak): ")
 
             if not setuju:
                 continue
@@ -128,11 +118,7 @@ def lihat_pendaftar():
             kuota_divisi[divisi_diterima] -= 1
             simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
-            print(
-                Fore.GREEN +
-                "\nPendaftar berhasil diterima." +
-                Style.RESET_ALL
-            )
+            print(Fore.GREEN + "\nPendaftar berhasil diterima." + Style.RESET_ALL)
             enter_kembali()
             break
 
@@ -154,7 +140,6 @@ def lihat_kuota():
 
     print(tabel)
     enter_kembali()
-
 
 # UPDATE
 def update_divisi():
@@ -187,9 +172,7 @@ def update_divisi():
 
     while True:
 
-        pilihan = input(
-            "\nMasukkan nomor pendaftar atau 'kembali': "
-        ).strip()
+        pilihan = input("\nMasukkan nomor pendaftar atau 'kembali': ").strip()
 
         if pilihan.lower() == "kembali":
             return

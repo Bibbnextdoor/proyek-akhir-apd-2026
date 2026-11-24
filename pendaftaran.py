@@ -28,9 +28,9 @@ def daftar_divisi(nama, nim):
     tabel_divisi = PrettyTable()
     tabel_divisi.field_names = ["No", "Divisi", "Kuota Awal"]
 
-    for i, divisi in enumerate(ada_divisi):
+    for nomor, divisi in enumerate(ada_divisi):
         tabel_divisi.add_row([
-            i + 1,
+            nomor + 1,
             divisi,
             kuota_divisi[divisi]
         ])
@@ -57,8 +57,8 @@ def daftar_divisi(nama, nim):
         except ValueError as e:
             print(e)
         else:
-                alasan.append(alasan_1)
-                break
+            alasan.append(alasan_1)
+            break
             
     pilihan_kedua = [divisi for divisi in ada_divisi if divisi not in pilihan_divisi]
 
@@ -75,8 +75,8 @@ def daftar_divisi(nama, nim):
             except ValueError as e:
                 print(e)
             else:
-                    alasan.append(alasan_2)
-                    break
+                alasan.append(alasan_2)
+                break
     
     
     pilihan_ketiga = [divisi for divisi in ada_divisi if divisi not in pilihan_divisi]
@@ -102,9 +102,7 @@ def daftar_divisi(nama, nim):
         print(f"Divisi {i+1}: {pilihan_divisi[i]}")
         print(f"Alasan: {alasan[i]}")
     
-    setuju = konfirmasi(
-        "\nApakah data sudah benar? (ya/tidak): "
-    )
+    setuju = konfirmasi("\nApakah data sudah benar? (ya/tidak): ")
 
     if setuju:
 
@@ -128,9 +126,7 @@ def daftar_divisi(nama, nim):
 
     else:
 
-        ubah = konfirmasi(
-            "Apakah ingin mengubah pilihan divisi? (ya/tidak): "
-        )
+        ubah = konfirmasi("Apakah ingin mengubah pilihan divisi? (ya/tidak): ")
 
         if ubah:
             daftar_divisi(nama, nim)

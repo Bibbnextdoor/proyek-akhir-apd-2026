@@ -22,23 +22,11 @@ def main():
         # KELUAR
         elif pilihan == "3":
             clear()
-
-            print(
-                Fore.BLUE +
-                "\nTerima kasih telah menggunakan "
-                "Sistem Pendaftaran Makrab Informatika 2026." +
-                Style.RESET_ALL
-            )
-
+            print(Fore.BLUE + "\nTerima kasih telah menggunakan " "Sistem Pendaftaran Makrab Informatika 2026." + Style.RESET_ALL)
             program_berjalan = False
-
-        # INPUT TIDAK VALID
+            
         else:
-            print(
-                Fore.RED +
-                "\nPilihan tidak valid." +
-                Style.RESET_ALL
-            )
+            print(Fore.RED + "\nPilihan tidak valid." + Style.RESET_ALL)
             enter_kembali()
 
 if __name__ == "__main__":
