@@ -14,7 +14,6 @@ def cari_akun(nim):
     return None
 
 def login():
-   
     for percobaan in range(3, 0, -1):
         clear()
         print("\n=== LOGIN ===")
@@ -33,24 +32,18 @@ def login():
             print("Password salah.")
 
         else:
-            print(
-                Fore.GREEN +
-                f"\nSelamat datang, {akun['nama']}!" +
-                Style.RESET_ALL
-            )
-
-            input("\nTekan ENTER untuk masuk ke menu...")
-
             if akun["role"] == "admin":
+                print(Fore.GREEN + f"\nSelamat datang, {akun['nama']}! ke menu admin" + Style.RESET_ALL)
+                input("\nTekan ENTER untuk masuk ke menu...")
                 menu_admin_login()
 
             elif akun["role"] == "user":
-                menu_user_login(
-                    akun["nama"],
-                    akun["nim"]
-                )
+                print(Fore.GREEN + f"\nSelamat datang, {akun['nama']}! ke menu pendaftaran" + Style.RESET_ALL)
+                input("\nTekan ENTER untuk masuk ke menu...")                
+                menu_user_login(akun["nama"], akun["nim"])
+            
             return
-    
+
         if percobaan > 1:
             enter_ulang()
     
@@ -72,10 +65,8 @@ def register():
             if nama.lower() == "kembali":
                 return
             
-            if nama == "":
-                raise ValueError("Nama tidak boleh kosong.")
-            elif not re.match(r"^[a-zA-Z\s']+$", nama):
-                raise ValueError("Input hanya boleh huruf, spasi, dan tanda petik satu (')!")
+            if not re.match(r"^[a-zA-Z\s']+$", nama):
+                raise ValueError("Nama tidak boleh kosong atau Input hanya boleh huruf, spasi, dan tanda petik satu (')!.\n")
                     
         except ValueError as e:
             print(e)    
