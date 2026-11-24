@@ -126,6 +126,10 @@ def lihat_pendaftar():
 # READ
 def lihat_kuota():
     clear()
+    if not data_pendaftars_divisi:
+        print("Belum ada pendaftar.")
+        enter_kembali()
+        return
 
     print("\n=== SISA KUOTA DIVISI ===")
 
@@ -143,12 +147,8 @@ def lihat_kuota():
 
     print("\n=== DIVISI YANG BELUM PERNAH DIPILIH ===")
 
-    if not data_pendaftars_divisi:
-        print("Belum ada pendaftar.")
-        enter_kembali()
-        return
 
-    semua_divisi = set(DAFTAR_DIVSI)
+    semua_divisi = set(data_daftar_divisi)
 
     divisi_dipilih = set()
     for pendaftar in data_pendaftars_divisi:
@@ -163,7 +163,7 @@ def lihat_kuota():
         tabel_belum.field_names = ["No", "Divisi"]
 
         nomor = 1
-        for divisi in DAFTAR_DIVSI:
+        for divisi in data_daftar_divisi:
             if divisi in belum_dipilih:
                 tabel_belum.add_row([nomor, divisi])
                 nomor += 1
