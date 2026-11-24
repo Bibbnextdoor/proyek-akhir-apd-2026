@@ -1,5 +1,5 @@
 from data import *
-from tampilan import clear, enter_kembali, pilih_divisi, konfirmasi, menu_user
+from utiliti import clear, enter_kembali, pilih_divisi, konfirmasi, menu_user
 from prettytable import PrettyTable
 from colorama import Fore, Style
 from datetime import datetime
@@ -20,7 +20,7 @@ def daftar_divisi(nama, nim):
     tabel_divisi = PrettyTable()
     tabel_divisi.field_names = ["No", "Divisi", "Kuota Awal"]
 
-    for i, divisi in enumerate(daftar_divisi):
+    for i, divisi in enumerate(DAFTAR_DIVSI):
         tabel_divisi.add_row([
             i + 1,
             divisi,
@@ -36,12 +36,12 @@ def daftar_divisi(nama, nim):
 
     pilihan_divisi = []
 
-    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", daftar_divisi)
+    pilihan_1 = pilih_divisi("Pilih DIVISI PRIORITAS 1:", DAFTAR_DIVSI)
 
     pilihan_divisi.append(pilihan_1)
 
     pilihan_kedua = [
-        divisi for divisi in daftar_divisi
+        divisi for divisi in DAFTAR_DIVSI
         if divisi not in pilihan_divisi
     ]
 
@@ -53,7 +53,7 @@ def daftar_divisi(nama, nim):
     pilihan_divisi.append(pilihan_2)
     
     pilihan_ketiga = [
-        divisi for divisi in daftar_divisi
+        divisi for divisi in DAFTAR_DIVSI
         if divisi not in pilihan_divisi
     ]
 

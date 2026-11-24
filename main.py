@@ -1,4 +1,4 @@
-from tampilan import menu_utama, clear, enter_kembali
+from utiliti import menu_utama, clear, enter_kembali
 from auth import login, register
 from pwinput import pwinput
 from colorama import init, Fore, Style
@@ -24,21 +24,13 @@ def main():
             clear()
 
             print(
-                Fore.BLUE +
-                "\nTerima kasih telah menggunakan "
-                "Sistem Pendaftaran Makrab Informatika 2026." +
-                Style.RESET_ALL
-            )
+                Fore.BLUE + "\nTerima kasih telah menggunakan " "Sistem Pendaftaran Makrab Informatika 2026." + Style.RESET_ALL)
 
             program_berjalan = False
 
         # INPUT TIDAK VALID
         else:
-            print(
-                Fore.RED +
-                "\nPilihan tidak valid." +
-                Style.RESET_ALL
-            )
+            print(Fore.RED + "\nPilihan tidak valid." + Style.RESET_ALL)
             enter_kembali()
 
 if __name__ == "__main__":

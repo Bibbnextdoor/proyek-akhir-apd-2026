@@ -129,6 +129,7 @@ def lihat_pendaftar():
     enter_kembali()
 
 # READ
+# READ
 def lihat_kuota():
     clear()
 
@@ -137,7 +138,7 @@ def lihat_kuota():
     tabel = PrettyTable()
     tabel.field_names = ["No", "Divisi", "Sisa Kuota"]
 
-    for i, divisi in enumerate(daftar_divisi):
+    for i, divisi in enumerate(DAFTAR_DIVSI):
         tabel.add_row([
             i + 1,
             divisi,
@@ -145,6 +146,36 @@ def lihat_kuota():
         ])
 
     print(tabel)
+
+    print("\n=== DIVISI YANG BELUM PERNAH DIPILIH ===")
+
+    if not data_pendaftars_divisi:
+        print("Belum ada pendaftar.")
+        enter_kembali()
+        return
+
+    semua_divisi = set(DAFTAR_DIVSI)
+
+    divisi_dipilih = set()
+    for pendaftar in data_pendaftars_divisi:
+        divisi_dipilih.update(pendaftar["pilihan_divisi"])
+
+    belum_dipilih = semua_divisi.difference(divisi_dipilih)
+
+    if not belum_dipilih:
+        print("Semua divisi sudah pernah dipilih oleh pendaftar.")
+    else:
+        tabel_belum = PrettyTable()
+        tabel_belum.field_names = ["No", "Divisi"]
+
+        nomor = 1
+        for divisi in DAFTAR_DIVSI:
+            if divisi in belum_dipilih:
+                tabel_belum.add_row([nomor, divisi])
+                nomor += 1
+
+        print(tabel_belum)
+
     enter_kembali()
 
 
@@ -212,7 +243,7 @@ def update_divisi():
 
     pilihan_baru = []
 
-    for divisi in DAFTAR_DIVISI:
+    for divisi in DAFTAR_DIVSI:
         if divisi != divisi_lama and kuota_divisi[divisi] > 0:
             pilihan_baru.append(divisi)
 
