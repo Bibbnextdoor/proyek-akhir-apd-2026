@@ -115,9 +115,16 @@ def register():
 
     data_akun.append(akun_baru)
     
-    simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
+    berhasil = simpan_data(data_akun, data_pendaftars_divisi, kuota_divisi)
 
-    print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
-    print("Akun berhasil dibuat sebagai User.")
+    if berhasil:
+        print(Fore.GREEN + "\nRegistrasi berhasil!" + Style.RESET_ALL)
+        print("Akun berhasil dibuat sebagai User.")
 
+    else:
+        data_akun.pop()
+
+        print(Fore.RED + "\nRegistrasi gagal disimpan." + Style.RESET_ALL)
+        print("Data akun dikembalikan. Silakan mencoba kembali.")
+        
     enter_kembali()

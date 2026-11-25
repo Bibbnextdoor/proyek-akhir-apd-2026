@@ -34,16 +34,22 @@ def lihat_pendaftar():
         ]
 
         for i, pendaftar in enumerate(data_pendaftars_divisi):
+            divisi = pendaftar["pilihan_divisi"]
+            
+            divisi_1 = divisi[0] if len(divisi) > 0 else "-"
+            divisi_2 = divisi[1] if len(divisi) > 1 else "-"
+            divisi_3 = divisi[2] if len(divisi) > 2 else "-"
+            
             tabel.add_row([
                 i + 1,
                 pendaftar["nama"],
-                pendaftar["pilihan_divisi"][0],
-                pendaftar["pilihan_divisi"][1],
-                pendaftar["pilihan_divisi"][2],
+                divisi_1,
+                divisi_2,
+                divisi_3,
                 pendaftar["status"],
                 pendaftar["divisi_diterima"]
             ])
-
+            
         print(tabel)
 
         while True:

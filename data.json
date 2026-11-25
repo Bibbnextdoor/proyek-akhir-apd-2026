@@ -19,21 +19,9 @@
             "role": "user"
         },
         {
-            "nama": "qwer",
-            "nim": "12",
-            "password": "12",
-            "role": "user"
-        },
-        {
-            "nama": "qwe",
-            "nim": "124",
-            "password": "124",
-            "role": "user"
-        },
-        {
-            "nama": "qwerty",
-            "nim": "15",
-            "password": "15",
+            "nama": "qq",
+            "nim": "3",
+            "password": "3",
             "role": "user"
         }
     ],
@@ -47,24 +35,37 @@
                 "KEAMANAN"
             ],
             "alasan": [
-                "qwerty",
-                "qwerty",
-                "qwerty"
+                "12",
+                "we",
+                "ew"
             ],
             "status": "Menunggu Konfirmasi",
             "divisi_diterima": "-",
-            "tanggal": "24-11-2026 21:13"
+            "tanggal": "25-11-2026 11:15"
+        },
+        {
+            "nama": "qq",
+            "nim": "3",
+            "pilihan_divisi": [
+                "ACARA"
+            ],
+            "alasan": [
+                "aada"
+            ],
+            "status": "Diterima",
+            "divisi_diterima": "ACARA",
+            "tanggal": "25-11-2026 11:49"
         }
     ],
     "kuota_divisi": {
-        "ACARA": 1,
-        "HUMAS": 3,
-        "KEAMANAN": 2,
-        "KESEHATAN": 3,
-        "DANUS": 3,
-        "KONSUMSI": 1,
-        "PDD": 2,
-        "PERLENGKAPAN": 5,
-        "DEKORASI": 4
+        "ACARA": 0,
+        "HUMAS": 0,
+        "KEAMANAN": 0,
+        "KESEHATAN": 0,
+        "DANUS": 0,
+        "KONSUMSI": 0,
+        "PDD": 0,
+        "PERLENGKAPAN": 0,
+        "DEKORASI": 0
     }
 }
