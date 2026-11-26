@@ -1,0 +1,64 @@
+{
+    "data_akun": [
+        {
+            "nama": "ferdika",
+            "nim": "039",
+            "password": "039",
+            "role": "admin"
+        },
+        {
+            "nama": "habibur",
+            "nim": "045",
+            "password": "045",
+            "role": "admin"
+        },
+        {
+            "nama": "aja",
+            "nim": "038",
+            "password": "038",
+            "role": "user"
+        },
+        {
+            "nama": "Fathur",
+            "nim": "001",
+            "password": "001",
+            "role": "user"
+        },
+        {
+            "nama": "Nathan",
+            "nim": "069",
+            "password": "069",
+            "role": "user"
+        }
+    ],
+    "data_pendaftar": [
+        {
+            "nama": "Nathan",
+            "nim": "069",
+            "pilihan_divisi": [
+                "PERLENGKAPAN",
+                "PDD",
+                "KONSUMSI"
+            ],
+            "alasan": [
+                "lengkap",
+                "foto",
+                "Makan"
+            ],
+            "status": "Diterima",
+            "divisi_diterima": "PDD",
+            "tanggal": "25-11-2026 12:22"
+        }
+    ],
+    "kuota_divisi": {
+        "ACARA": 1,
+        "HUMAS": 1,
+        "KEAMANAN": 1,
+        "KESEHATAN": 1,
+        "DANUS": 1,
+        "KONSUMSI": 1,
+        "PDD": 0,
+        "PERLENGKAPAN": 1,
+        "DEKORASI": 1
+    }
+}
