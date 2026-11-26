@@ -146,28 +146,6 @@ def lihat_kuota():
 
     print(tabel)
     
-    print("\n=== DIVISI YANG BELUM DIPILIH ===")
-    all_divisi = set(data_daftar_divisi)
-    divisi_terisi = set()
-    for pendaftar in data_pendaftars_divisi:
-        divisi_terisi.update(pendaftar["pilihan_divisi"])
-    
-    divisi_belum_dipilih = all_divisi.difference(divisi_terisi)
-    
-    if divisi_belum_dipilih:
-        tabel_divisiBelumDipilih = PrettyTable()
-        tabel_divisiBelumDipilih.field_names = ["No", "Divisi"]
-
-        for i, divisi in enumerate(divisi_belum_dipilih):
-            tabel_divisiBelumDipilih.add_row([
-                i + 1,
-                divisi
-            ])
-
-        print(tabel_divisiBelumDipilih)
-    else:
-        print("Semua divisi sudah pernah dipilih.")
-    
     enter_kembali()
 
 # UPDATE
