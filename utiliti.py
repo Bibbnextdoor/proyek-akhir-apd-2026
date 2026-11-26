@@ -97,3 +97,4 @@ def konfirmasi(pesan):
             return False
         else:
             print("Input tidak valid. Masukkan 'ya' atau 'tidak'.")
+            
