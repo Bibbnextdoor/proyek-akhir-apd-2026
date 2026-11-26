@@ -37,3 +37,4 @@ def muat_data():
 
     else:
         return data
+    

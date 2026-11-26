@@ -67,3 +67,4 @@ def grafik_minat_divisi():
     plt.show()
 
     enter_kembali()
+    

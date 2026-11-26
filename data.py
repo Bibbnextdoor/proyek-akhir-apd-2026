@@ -86,3 +86,4 @@ else:
     data_pendaftars_divisi = data_tersimpan["data_pendaftar"]
 
     kuota_divisi = data_tersimpan["kuota_divisi"]
+
