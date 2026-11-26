@@ -37,7 +37,25 @@
             "role": "user"
         }
     ],
-    "data_pendaftar": [],
+    "data_pendaftar": [
+        {
+            "nama": "Nathan",
+            "nim": "069",
+            "pilihan_divisi": [
+                "ACARA",
+                "HUMAS",
+                "KEAMANAN"
+            ],
+            "alasan": [
+                "Disini bisa simbol unik (!), angka 12345, tetapi tidak boleh kosong",
+                "Ada",
+                "ada"
+            ],
+            "status": "Menunggu Konfirmasi",
+            "divisi_diterima": "-",
+            "tanggal": "26-11-2026 15:24"
+        }
+    ],
     "kuota_divisi": {
         "ACARA": 1,
         "HUMAS": 1,
