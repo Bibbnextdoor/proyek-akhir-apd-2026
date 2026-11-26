@@ -29,27 +29,15 @@
             "nim": "069",
             "password": "069",
             "role": "user"
-        }
-    ],
-    "data_pendaftar": [
+        },
         {
-            "nama": "Nathan",
-            "nim": "069",
-            "pilihan_divisi": [
-                "PERLENGKAPAN",
-                "PDD",
-                "KONSUMSI"
-            ],
-            "alasan": [
-                "lengkap",
-                "foto",
-                "Makan"
-            ],
-            "status": "Diterima",
-            "divisi_diterima": "PDD",
-            "tanggal": "25-11-2026 12:22"
+            "nama": "Biburq",
+            "nim": "000",
+            "password": "000",
+            "role": "user"
         }
     ],
+    "data_pendaftar": [],
     "kuota_divisi": {
         "ACARA": 1,
         "HUMAS": 1,
@@ -57,7 +45,7 @@
         "KESEHATAN": 1,
         "DANUS": 1,
         "KONSUMSI": 1,
-        "PDD": 0,
+        "PDD": 1,
         "PERLENGKAPAN": 1,
         "DEKORASI": 1
     }
